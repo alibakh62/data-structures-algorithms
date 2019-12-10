@@ -250,13 +250,100 @@ In the examples we've looked at here, we've been approximating efficiency by cou
 
 Suppose that we analyze an algorithm and decide that it has the following relationship between the input size,  `n`, and the number of operations needed to carry out the algorithm:
 
-$N = n^2 +5$
-
-<img src="https://latex.codecogs.com/gif.latex?N&space;=&space;n^2&space;&plus;5" title="N = n^2 +5" />
-
+<img src="https://latex.codecogs.com/png.latex?\dpi{150}&space;N&space;=&space;n^2&space;&plus;5" title="N = n^2 +5" />
 
 Where  `n`  is the input size and  `N`  is the number of operations required.
 
 For example, if we gave this algorithm an input of  2, the number of required operations would be ` 2^2 + 5`  or simply  9.
 
-<img src="https://latex.codecogs.com/png.latex?\dpi{300}&space;N&space;=&space;n^2&space;&plus;5" title="N = n^2 +5" />
+The thing to notice in the above exercise, is this: In  `n^2 + 5`, the  5  has very little impact on the total efficiency—especially as the input size gets larger and larger. Asking the computer to do 10,005 operations vs. 10,000 operations makes little difference. Thus, it is the  `n^2`  that we really care about the most, and the  `+ 5`  makes little difference.
+
+Most of the time, when analyzing the efficiency of an algorithm, the most important thing to know is the  _order_. In other words, we care a lot whether the algorithm's time-complexity has a  _linear_  order or a  _quadratic_  order (or some other order). This means that very often (in fact, most of the time) when you are asked to analyze an algorithm, you can do so by making an  _approximation_  that significantly simplifies things. In this next video, Brynn will discuss this concept and show how it's used with Big O Notation.
+
+See [video1](https://youtu.be/zOenWuEDhFo).
+
+See [video2](https://youtu.be/OM7s9pb2TMU).
+
+# Efficiency practice
+
+Check the [the python notebook](Efficiency-practice.ipynb) for some examples.
+
+What is the run time analysis of the following code:
+
+```python
+def main(x,y):
+    if True:
+        z = x + y
+   for i in range(10):
+        z+=i
+  return z
+```
+
+It's `O(1)`.
+
+```python
+def main(list_1,list_2):
+    count = 0
+    for item_1 in list_1:
+        for item_2 in list_2:
+            if item_1 == item_2:
+                count+=1
+    return count
+```
+
+It's `O(n^2)`.
+
+What is the simplification of this run time analysis: `4n^2 + 3n + 7` ? `n^2`.
+
+## Resources
+
+[Big-O Cheatsheet](http://bigocheatsheet.com/)
+
+[Python Complexities](https://wiki.python.org/moin/TimeComplexity)
+
+# Space Complexity
+So far, we've been mostly talking about time efficiency. But you can actually use the same notation to refer to space efficiency too. For example, let's say you needed to copy over your input string three times in your code for some reason. Then the space efficiency would look something like `O(3n)`. Space efficiency is asked less frequently in interviews but it's definitely something you should consider because it will come up from time to time. See the video [here](https://youtu.be/HXeqNa7RMVQ).
+
+## Space Complexity Examples
+
+When we refer to  _space complexity_, we are talking about how efficient our algorithm is in terms of memory usage. This comes down to the datatypes of the variables we are using and their allocated space requirements. In Python, it's less clear how to do this due to the the underlying data structures using more memory for house keeping functions (as the language is actually written in C).
+
+For example, in C/C++, an integer type takes up 4 bytes of memory to store the value, but in Python 3 an integer takes 14 bytes of space. Again, this extra space is used for housekeeping functions in the Python language.
+
+For the examples of this lesson we will avoid this complexity and assume the following sizes:
+
+<p align="center">
+<img src="img/space-complexity.png" alt="drawing" width="200"/>
+</p>
+
+It is also important to note that we will be focusing on just the data space being used and not any of the environment or instructional space.
+
+#### Example 1
+
+```python
+def our_constant_function():
+    x = 3 # Type int
+    y = 345 # Type int
+    z = 11 # Type int
+    answer = x+y+z
+    return answer
+```
+
+So in this example we have four integers (`x`,  `y`,  `z`  and  `answer`) and therefore our space complexity will be  `4*4 = 16 bytes`. This is an example of constant space complexity, since the amount of space used does not change with input size.
+
+#### Example 2
+
+```python
+def our_linear_function(n):
+    n = n # Type int
+    counter = 0 # Type int
+    list_ = [] # Assume that the list is empty (i.e., ignore the fact that there is actually meta data stored with Python lists)
+
+    while counter < n:
+        list. append(counter)
+        counter = counter + 1
+
+    return list_
+```
+
+So in this example we have two integers (`n`  and  `counter`) and an expanding list, and therefore our space complexity will be  `4*n + 8`  since we have an expanding integer list and two integer data types. This is an example of linear space complexity.
