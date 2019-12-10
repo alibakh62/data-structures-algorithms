@@ -252,6 +252,8 @@ Suppose that we analyze an algorithm and decide that it has the following relati
 
 $N = n^2 +5$
 
+<img src="https://latex.codecogs.com/gif.latex?N&space;=&space;n^2&space;&plus;5" title="N = n^2 +5" />
+
 Where  `n`  is the input size and  `N`  is the number of operations required.
 
 For example, if we gave this algorithm an input of  2, the number of required operations would be ` 2^2 + 5`  or simply  9.
