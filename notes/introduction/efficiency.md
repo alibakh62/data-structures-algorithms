@@ -1,3 +1,28 @@
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Efficiency](#efficiency)
+  - [**Space** and **time**](#space-and-time)
+  - [Algorithms](#algorithms)
+  - [But computers are so fast!](#but-computers-are-so-fast)
+- [Quantifying Efficiency](#quantifying-efficiency)
+  - [Counting lines](#counting-lines)
+- [Input size and efficiency](#input-size-and-efficiency)
+  - [The rate of increase](#the-rate-of-increase)
+  - [Order](#order)
+- [Big O Notation](#big-o-notation)
+- [Big O Notation (2/2)](#big-o-notation-22)
+- [Worst Case and Approximation](#worst-case-and-approximation)
+- [Efficiency practice](#efficiency-practice)
+  - [Resources](#resources)
+- [Space Complexity](#space-complexity)
+  - [Space Complexity Examples](#space-complexity-examples)
+      - [Example 1](#example-1)
+      - [Example 2](#example-2)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # Efficiency
 
 We said earlier that this Nanodegree program is about how to write code to  **solve problems**  and to do so  **efficiently**.
