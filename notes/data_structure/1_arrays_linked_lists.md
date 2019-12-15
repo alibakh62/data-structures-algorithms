@@ -134,3 +134,199 @@ Here's the bottom line:
 -   During this course, we will generally ignore this high-level functionality and treat Python lists as if they were simple arrays
 
 This approach will allow you to develop a better understanding for the underlying data structures.
+
+# Strings
+Strings in Python are arrays of bytes representing unicode characters.
+
+**Anagrams:** An anagram is a word (or phrase) that is formed by rearranging the letters of another word (or phrase).
+
+**Hamming Distance:** In information theory, the Hamming distance between two strings of equal length is the number of positions at which the corresponding symbols are different.
+
+Checkout [this notebook](Strings.ipynb) for some practice on the above concepts.
+
+# Linked Lists: Introduction
+Let's look at arrays in another way. You can think of an array as a set of boxes where each has an _address_ called an **index**. In a similar sense, a chain is like a construct called a **linked list**. 
+
+A **linked list** is an extension of a list, but it's definitely not an array. **There are still some things that have order, but there are no indices**. Instead, a linked list is characterized by its **links**. Each element has some notion of what the next element is since it's connected to it, but not necessarily how long the list is or where it is in the list. 
+
+An arrya is different. There is nothing in one element of the array that says here's your next element. You know what the next element is by what the next index is. 
+
+Now, **why whould anybody want to use a linked list?** Anyhow, an array gives you more information since you already know where is next element falls in the array. However, adding and removing elements from an array can be really complicated. 
+
+**Adding and removing elements from a linked list turns out to be so easy by comparison**. You can actually take an element out or add one in. There's only one real quick consideration here which we'll cover in the following sections.
+
+# Linked List
+In higher level programming languages _there often isn't a distinction between linked lists and arrays_. There's just a list that has the properties of both. 
+
+However, questions about these two data structures are fairly common in interviews, so it's important to know the difference. 
+
+Again, the main distinction is that each element stores different information. 
+
+In both cases, a single element will store a value (or the actual information). We also one othe type of information. In an array we would store a number as an index. You can get the next element by querying the array for the element at the next index (i.e. current_index + 1). 
+
+In a linked list, we store a reference to the next element in the list. In many languages, this will look like assigning the actual next element as a property of this element. Way down at the hardware level your element actually has some space dedicated for it in memory. So, basically the current element will also store the _**memory address**_ of the next element. 
+
+The next thing about the linked list is that **it's pretty easy to insert delete elements**. 
+
+Adding an element is going to be changing the next reference to point to the new object. That's it. 
+
+**NOTE:** There's a quick trick you need to remember though. If you delete the next reference and replace it with a new object, you'll lost your reference to this object. You should always assign your next pointer for the current element before you assign your next pointer for the previous element so you don't lose reference.
+
+**NOTE:** Note that insertion takes constant time in this case since you're just shifting around pointers and not iterating over every element in the list.
+
+**Removing an element** is going to look pretty similar.
+
+There's also something called **doubly linked list**, where you have pointers to the next element and the previous element. 
+
+See the video [here](https://youtu.be/ZONGA5wmREI).
+
+# Implement a Linked List
+We can interpret linked lists as nodes that contains two values: the node value and the address to the next node. To implement it in Python, we can do something like this:
+
+```python
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+head = Node(2)
+head.next = Node(1)
+
+print(head.value)
+print(head.next.value)
+```
+
+**Traversing a linked list**
+
+Here is an implementation of how to access the elements:
+
+```python
+def print_linked_list(head):
+    current_node = head
+    
+    while current_node is not None:
+        print(current_node.value)
+        current_node = current_node.next
+        
+print_linked_list(head)
+```
+
+## Creating a linked list using iteration
+Previously, we created a linked list using a very manual and tedious method. We called `next` multiple times on our `head` node.
+
+Now that we know about iterating over or traversing the linked list, is there a way we can use that to create a linked list?
+
+```python
+def create_linked_list(input_list):
+    head = None
+    for value in input_list:
+        if head is None:
+            head = Node(value)    
+        else:
+        # Move to the tail (the last node)
+            current_node = head
+            while current_node.next:
+                current_node = current_node.next
+        
+            current_node.next = Node(value)
+    return head
+```
+
+## A more efficient solution
+The above solution works, but it has some shortcomings. In this section, we'll demonstrate a different approach and see how its efficiency compares to the solution above.
+
+```python
+def create_linked_list_better(input_list):
+    
+    head = None
+    tail = None
+    
+    for value in input_list:
+        
+        if head is None:
+            head = Node(value)
+            tail = head # when we only have 1 node, head and tail refer to the same node
+        else:
+            tail.next = Node(value) # attach the new node to the `next` of tail
+            tail = tail.next # update the tail
+            
+    return head
+```
+
+## Test your code 
+Test the codes above using the code below:
+
+```python
+### Test Code
+def test_function(input_list, head):
+    try:
+        if len(input_list) == 0:
+            if head is not None:
+                print("Fail")
+                return
+        for value in input_list:
+            if head.value != value:
+                print("Fail")
+                return
+            else:
+                head = head.next
+        print("Pass")
+    except Exception as e:
+        print("Fail: "  + e)
+        
+        
+
+input_list = [1, 2, 3, 4, 5, 6]
+head = create_linked_list_better(input_list)
+test_function(input_list, head)
+
+input_list = [1]
+head = create_linked_list_better(input_list)
+test_function(input_list, head)
+
+input_list = []
+head = create_linked_list_better(input_list)
+test_function(input_list, head)
+```
+
+Refer to [this notebook](linkedlist.ipynb) for practice codes.
+
+## Types of linked lists
+For contents on this, refer to [this notebook](linkedlists-types.ipynb).
+
+For more practice on linked list, refer to [this notebook](linkedlist-practice.ipynb).
+
+## Reverse a linked list 
+Refer to [this notebook](linkedlist-reverse.ipynb).
+
+## Loop detection in linked list 
+Refer to [this notebook](linkedlist-loop.ipynb).
+
+## Flatten a linked list 
+Refere to [this notebook](linkedlist-flatten.ipynb).
+
+## Problem: Add One
+Refere to [this notebook](linkedlist-addone.ipynb).
+
+## Problem: Duplicate number
+Refer to [this notebook](linkedlist-duplicate.ipynb).
+
+## Problem: Max Sum Subarray
+Refere to [this notebook](linkedlist-fmaxsum.ipynb).
+
+## Problem: Pascal's Triangle
+Refer to [this notebook](linkedlist-pascal.ipynb).
+
+## Problem: Even after odd 
+Refer to [this notebook](linkedlist-evenodd.ipynb).
+
+## Problem: Skip i, Delete j
+Refer to [this notebook](linkedlist-skip.ipynb).
+
+## Problem: Swap Nodes
+Refer to [this notebook](linkedlist-swap.ipynb).
+
+
+
+
+
