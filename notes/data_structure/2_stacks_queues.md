@@ -49,4 +49,13 @@ See [this notebook](Build-a-queue-using-an-array.ipynb).
 ## Build a Queue Using a Linked List
 See [this notebook](Build-a-queue-using-a-linked-list.ipynb).
 
+## Building a Queue Using a Stack
+See [this notebook](Build-a-Queue-Using-a-Stack.ipynb).
+
+## Building a Queue Using High-Level Python
+See [this notebook](Build-a-Queue-Using-High-Level-Python.ipynb).
+
+## Reverse a Queue
+See [this notebook](Reverse-a-queue.ipynb).
+
 
