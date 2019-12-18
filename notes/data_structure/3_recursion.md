@@ -20,5 +20,13 @@ The above code doesn't do anything interesting, but it shows the main parts of a
 
 1. _**A recursive function needs to call itself at some point**_. 
 2. _**A recursive function needs a base case**_. 
+3. _**A recursive function needs to do is to alter the input parameter at some point**_.
    
 You can think of a recursive function kind of like a _while loop_ in some regards. You keep going through some code again and again until you hit some exit condition. In a recursive function the base case is like the exit function. 
+
+Without a nice base case, you could get stuck in something called **infinite recursion**. That means your code keeps calling itself and executing again and again, but because you never tell it when to stop, it just keeps going infinitely.
+
+If you aren't altering the input parameter or giving yourself some condition for changing every time you iterate, you'll never really know when to stop. And again you'll end up in _infinite recursion_. 
+
+Watch [this video](https://youtu.be/_aI2Jch6Epk) (minute 1:40) to learn more about some of the nuances of recursive functions.
+
